@@ -5,6 +5,10 @@ import java.util.regex.Pattern;
 public class WordSearch {
     public String[][] letters;
 
+    public int i = 0;
+    public int j = 0;
+
+
     public WordSearch(String[][] letters) {
         this.letters = letters;
     }
@@ -17,22 +21,32 @@ public class WordSearch {
 
 
     public void guess(String word) {
-        for (int i = 0; i < letters.length; i++) {
-            for (int j = 0; j < letters[i].length; j++) {
+        int tempI = 0;
+        int tempJ = 0;
+
+        for (i = 0; i < letters.length; i++) {
+            for (j = 0; j < letters[i].length; j++) {
+                int k = 0;
                 if (letters[i][j].equals(String.valueOf(word.charAt(0)))) {
                     System.out.println("Found '" + word.charAt(0) + "' At: " + i + ", " + j);
-                    for (int k = 1; k < word.length(); k ++) {
-                        
-                    }
+                    tempI = i;
+                    tempJ = j;
+                    k++;
                 }
-
-
-
                 }
             }
         System.out.println("Guessed word " + "'" + word + "'" + " not found");
         ask();
 
+
+    }
+
+    public void directionCheck(String word) {
+        for (int x = 1; x < word.length(); x++) {
+            // loop through the characters?
+            // then mess with i and j in order to do horizontal/diagonal search
+            // if letter is a match then add it to a temp character bank to create the whole word and then check it against the original word
+        }
 
     }
 
