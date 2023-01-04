@@ -5,8 +5,11 @@ import java.util.regex.Pattern;
 public class WordSearch {
     public String[][] letters;
 
-    public int i = 0;
-    public int j = 0;
+    public int tempI = 0;
+    public int tempJ = 0;
+
+
+
 
 
     public WordSearch(String[][] letters) {
@@ -21,17 +24,14 @@ public class WordSearch {
 
 
     public void guess(String word) {
-        int tempI = 0;
-        int tempJ = 0;
 
-        for (i = 0; i < letters.length; i++) {
-            for (j = 0; j < letters[i].length; j++) {
-                int k = 0;
+        for (int i = 0; i < letters.length; i++) {
+            for (int j = 0; j < letters[i].length; j++) {
                 if (letters[i][j].equals(String.valueOf(word.charAt(0)))) {
                     System.out.println("Found '" + word.charAt(0) + "' At: " + i + ", " + j);
-                    tempI = i;
-                    tempJ = j;
-                    k++;
+
+
+                    rightCheck(word, i, j);
                 }
                 }
             }
@@ -41,14 +41,121 @@ public class WordSearch {
 
     }
 
-    public void directionCheck(String word) {
-        for (int x = 1; x < word.length(); x++) {
-            // loop through the characters?
-            // then mess with i and j in order to do horizontal/diagonal search
-            // if letter is a match then add it to a temp character bank to create the whole word and then check it against the original word
+    public void rightCheck(String word, int i, int j) {
+        String checkBank = "";
+        try {
+            for (int y = 0; y < word.length(); y++) {
+                checkBank += letters[i][j + y];
+            }
+        }
+        catch (Exception e) {
+            System.out.println("Word not found; Goes past array");
+            System.out.println("");
         }
 
+        System.out.println("RIGHT CHECK: " + checkBank);
+
+        if (checkBank.equals(word)) {
+            System.out.println("Word found!");
+            System.out.println("");
+
+            checkBank = "";
+        }
+        else {
+            System.out.println("Word not found!");
+            System.out.println("");
+
+            checkBank = "";
+            leftCheck(word, i, j);
+        }
+        }
+
+
+    public void leftCheck(String word, int i, int j) {
+        String checkBank = "";
+        try {
+            for (int y = 0; y < word.length(); y++) {
+                checkBank += letters[i][j - y];
+            }
+        }
+        catch (Exception e) {
+            System.out.println("Word not found; Goes past array");
+            System.out.println("");
+        }
+
+        System.out.println("LEFT CHECK: " + checkBank);
+
+        if (checkBank.equals(word)) {
+            System.out.println("Word found!");
+            System.out.println("");
+
+            checkBank = "";
+        }
+        else {
+            System.out.println("Word not found!");
+            System.out.println("");
+
+            checkBank = "";
+            upCheck(word, i, j);
+        }
+        }
+    public void upCheck(String word, int i, int j) {
+        String checkBank = "";
+        try {
+            for (int x = 0; x < word.length(); x++) {
+                checkBank += letters[i + x][j];
+            }
+        }
+        catch (Exception e) {
+            System.out.println("Word not found; Goes past array");
+            System.out.println("");
+        }
+
+        System.out.println("UP CHECK: " + checkBank);
+
+        if (checkBank.equals(word)) {
+            System.out.println("Word found!");
+            System.out.println("");
+
+            checkBank = "";
+        }
+        else {
+            System.out.println("Word not found!");
+            System.out.println("");
+
+            checkBank = "";
+            downCheck(word, i, j);
+        }
     }
+    public void downCheck(String word, int i, int j) {
+        String checkBank = "";
+        try {
+            for (int x = 0; x < word.length(); x++) {
+                checkBank += letters[i - x][j];
+            }
+        }
+        catch (Exception e) {
+            System.out.println("Word not found; Goes past array");
+            System.out.println("");
+        }
+
+        System.out.println("UP CHECK: " + checkBank);
+
+        if (checkBank.equals(word)) {
+            System.out.println("Word found!");
+            System.out.println("");
+
+            checkBank = "";
+        }
+        else {
+            System.out.println("Word not found!");
+            System.out.println("");
+
+            checkBank = "";
+        }
+    }
+
+
 
 
     public static void ask() {
