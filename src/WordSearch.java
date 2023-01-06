@@ -11,8 +11,6 @@ public class WordSearch {
 
     public static void main(String[] args) {
         ask();
-
-
     }
 
     public static void ask() {
@@ -29,12 +27,10 @@ public class WordSearch {
             WordSearch crossword = new WordSearch(ChristmasWordSearch.letters);
             crossword.guess(wordInput.toUpperCase());
         }
-
         else {
             System.out.println("Invalid Syntax | Please input a word.");
             ask();
         }
-
     }
 
 
@@ -43,20 +39,13 @@ public class WordSearch {
         for (int i = 0; i < letters.length; i++) {
             for (int j = 0; j < letters[i].length; j++) {
                 if (letters[i][j].equals(String.valueOf(word.charAt(0)))) {
-                    System.out.println("---------------------------------------------------");
-                    System.out.println("Found '" + word.charAt(0) + "' At: " + i + ", " + j);
-                    System.out.println("---------------------------------------------------");
-                    System.out.println();
-
-
                     rightCheck(word, i, j);
                 }
-                }
             }
+        }
+        System.out.println();
         System.out.println("Guessed word " + "'" + word + "'" + " not found");
         ask();
-
-
     }
 
     public void rightCheck(String word, int i, int j) {
@@ -66,11 +55,8 @@ public class WordSearch {
                 checkBank.append(letters[i][j + y]);
             }
         }
-        catch (Exception e) {
-            System.out.println("Word not found; Goes past array");
+        catch (Exception ArrayIndexOutOfBoundsException) {
         }
-
-        System.out.println("RIGHT CHECK: " + checkBank);
 
         if (word.equals(checkBank.toString())) {
             System.out.println("------------------------------------------------------------------");
@@ -83,13 +69,10 @@ public class WordSearch {
             ask();
         }
         else {
-            System.out.println("Word not found!");
-            System.out.println();
-
             checkBank = new StringBuilder();
             leftCheck(word, i, j);
         }
-        }
+    }
 
 
     public void leftCheck(String word, int i, int j) {
@@ -99,11 +82,8 @@ public class WordSearch {
                 checkBank.append(letters[i][j - y]);
             }
         }
-        catch (Exception e) {
-            System.out.println("Word not found; Goes past array");
+        catch (Exception ArrayIndexOutOfBoundsException) {
         }
-
-        System.out.println("LEFT CHECK: " + checkBank);
 
         if (word.equals(checkBank.toString())) {
             System.out.println("------------------------------------------------------------------");
@@ -116,13 +96,10 @@ public class WordSearch {
             ask();
         }
         else {
-            System.out.println("Word not found!");
-            System.out.println();
-
             checkBank = new StringBuilder();
             upCheck(word, i, j);
         }
-        }
+    }
     public void upCheck(String word, int i, int j) {
         StringBuilder checkBank = new StringBuilder();
         try {
@@ -130,11 +107,8 @@ public class WordSearch {
                 checkBank.append(letters[i - x][j]);
             }
         }
-        catch (Exception e) {
-            System.out.println("Word not found; Goes past array");
+        catch (Exception ArrayIndexOutOfBoundsException) {
         }
-
-        System.out.println("UP CHECK: " + checkBank);
 
         if (word.equals(checkBank.toString())) {
             System.out.println("------------------------------------------------------------------");
@@ -147,9 +121,6 @@ public class WordSearch {
             ask();
         }
         else {
-            System.out.println("Word not found!");
-            System.out.println();
-
             checkBank = new StringBuilder();
             downCheck(word, i, j);
         }
@@ -161,12 +132,8 @@ public class WordSearch {
                 checkBank.append(letters[i + x][j]);
             }
         }
-        catch (Exception e) {
-            System.out.println("Word not found; Goes past array");
-            System.out.println();
+        catch (Exception ArrayIndexOutOfBoundsException  ) {
         }
-
-        System.out.println("DOWN CHECK: " + checkBank);
 
         if (word.equals(checkBank.toString())) {
             System.out.println("------------------------------------------------------------------");
@@ -180,9 +147,6 @@ public class WordSearch {
             ask();
         }
         else {
-            System.out.println("Word not found!");
-            System.out.println();
-
             checkBank = new StringBuilder();
             rightDiagCheck(word, i, j);
         }
@@ -196,22 +160,15 @@ public class WordSearch {
                 upBank.append(letters[i - x][j + x]);
             }
         }
-        catch (Exception e) {
-            System.out.println("Word not found; Goes past array");
-            System.out.println();
+        catch (Exception ArrayIndexOutOfBoundsException) {
         }
         try {
             for (int x = 0; x < word.length(); x++) {
                 downBank.append(letters[i + x][j - x]);
             }
         }
-        catch (Exception e) {
-            System.out.println("Word not found; Goes past array");
-            System.out.println();
+        catch (Exception ArrayIndexOutOfBoundsException) {
         }
-
-        System.out.println("Right Diagonal (UP) CHECK: " + upBank);
-        System.out.println("Right Diagonal (DOWN) CHECK: " + downBank);
 
         if (word.equals(upBank.toString())) {
             System.out.println("------------------------------------------------------------------");
@@ -238,9 +195,6 @@ public class WordSearch {
             ask();
         }
         else {
-            System.out.println("Word not found!");
-            System.out.println();
-
             upBank = new StringBuilder();
             downBank = new StringBuilder();
 
@@ -257,25 +211,17 @@ public class WordSearch {
             for (int x = 0; x < word.length(); x++) {
                 upBank.append(letters[i - x][j - x]);
             }
-        } catch (Exception e) {
-            System.out.println("Word not found; Goes past array");
-            System.out.println();
+        }
+        catch (Exception ArrayIndexOutOfBoundsException) {
         }
         //diagonal going down
         try {
             for (int x = 0; x < word.length(); x++) {
-                System.out.println(letters[i + x][j + x]);
                 downBank.append(letters[i + x][j + x]);
             }
         }
-        catch (Exception e) {
-            System.out.println("Word not found; Goes past array");
-            System.out.println();
+        catch (Exception ArrayIndexOutOfBoundsException) {
         }
-
-        System.out.println("Left Diagonal (UP) CHECK: " + upBank);
-        System.out.println("Left Diagonal (DOWN) CHECK: " + downBank);
-
 
         if (word.equals(upBank.toString())) {
             System.out.println("------------------------------------------------------------------");
@@ -302,9 +248,6 @@ public class WordSearch {
             ask();
         }
         else {
-            System.out.println("Word not found!");
-            System.out.println();
-
             upBank = new StringBuilder();
             downBank = new StringBuilder();
         }
