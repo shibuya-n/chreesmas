@@ -206,7 +206,7 @@ public class WordSearch {
             }
         }
         catch (Exception e) {
-            System.out.println("Word nto found; Goes past array");
+            System.out.println("Word not found; Goes past array");
             System.out.println();
         }
 
